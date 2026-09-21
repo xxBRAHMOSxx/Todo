@@ -1,14 +1,89 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap');
 @import "tailwindcss";
 
-@theme {
-    ----color-primary: #f3f4f6;
+:root {
+  font-family: 'DM Sans', sans-serif;
+  color: #172033;
+  background: #f6f7fb;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
 }
 
-@layer base {
-    body {
-        @apply bg-gradient-to-r from-green-600 to-green-700 text-teal-300;
-    }
-} 
-.input{
- @apply border-2 text-white outline-none ring-0
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; min-height: 100vh; }
+button, input, textarea { font: inherit; }
+button { cursor: pointer; }
+.display-font { font-family: 'Manrope', sans-serif; }
+.app-shell {
+  min-height: 100vh;
+  background: radial-gradient(circle at 10% 0%, #eef1ff 0, transparent 32rem), #f6f7fb;
+}
+.auth-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(420px, .95fr);
+}
+.auth-visual {
+  padding: clamp(2rem, 6vw, 6rem);
+  color: white;
+  background: linear-gradient(145deg, #151a38, #333d83 65%, #6273d8);
+  position: relative;
+  overflow: hidden;
+}
+.auth-visual::after {
+  content: '';
+  position: absolute;
+  width: 28rem;
+  height: 28rem;
+  right: -10rem;
+  bottom: -12rem;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 50%;
+  box-shadow: 0 0 0 3rem rgba(255,255,255,.05), 0 0 0 7rem rgba(255,255,255,.04);
+}
+.auth-form-panel { display: grid; place-items: center; padding: 2rem; }
+.form-card {
+  width: min(100%, 430px);
+  padding: clamp(1.5rem, 5vw, 3rem);
+  background: rgba(255,255,255,.9);
+  border: 1px solid #e6e8f0;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(41, 48, 89, .1);
+}
+.field-label { display: block; margin: 1.15rem 0 .45rem; color: #667085; font-size: .82rem; font-weight: 700; }
+.field-input {
+  width: 100%; border: 1px solid #dfe3ed; border-radius: 12px; padding: .85rem 1rem;
+  color: #172033; background: #fbfcff; outline: none; transition: .2s;
+}
+.field-input:focus { border-color: #6474dc; box-shadow: 0 0 0 4px #6474dc1c; }
+.primary-button {
+  width: 100%; border: 0; border-radius: 12px; padding: .9rem 1rem; color: #fff;
+  background: #5666d8; font-weight: 700; transition: .2s;
+}
+.primary-button:hover { background: #4555c5; transform: translateY(-1px); }
+.secondary-button {
+  border: 1px solid #e0e3ed; border-radius: 10px; padding: .65rem .9rem;
+  color: #4d5870; background: #fff; font-weight: 700; transition: .2s;
+}
+.secondary-button:hover { border-color: #aeb7e9; color: #4c5ccc; }
+.danger-button { color: #d34b61; }
+.danger-button:hover { border-color: #f1b9c3; background: #fff8f8; }
+.dashboard { width: min(1120px, calc(100% - 2rem)); margin: 0 auto; padding: 2rem 0 4rem; }
+.topbar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 3rem; }
+.brand-mark { display: flex; align-items: center; gap: .7rem; color: #172033; font-weight: 800; }
+.brand-icon { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 11px; color: white; background: #5666d8; }
+.task-layout { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(290px, .6fr); gap: 1.5rem; align-items: start; }
+.surface { border: 1px solid #e5e7ef; border-radius: 20px; background: #fff; box-shadow: 0 10px 30px rgba(38, 46, 83, .05); }
+.task-card { display: flex; justify-content: space-between; gap: 1rem; padding: 1.2rem; }
+.task-card + .task-card { border-top: 1px solid #edf0f5; }
+.task-title { margin: 0 0 .35rem; color: #202941; font-weight: 700; }
+.task-description { margin: 0; color: #7b8497; font-size: .9rem; line-height: 1.5; }
+.empty-state { padding: 3.5rem 2rem; text-align: center; color: #7b8497; }
+.empty-icon { margin: 0 auto 1rem; display: grid; place-items: center; width: 48px; height: 48px; border-radius: 14px; color: #5666d8; background: #eef0ff; font-size: 1.4rem; }
+@media (max-width: 800px) {
+  .auth-shell { display: block; }
+  .auth-visual { min-height: 220px; padding: 2rem; }
+  .auth-visual::after { width: 15rem; height: 15rem; }
+  .task-layout { grid-template-columns: 1fr; }
+  .topbar { margin-bottom: 2rem; }
 }

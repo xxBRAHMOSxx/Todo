@@ -3,7 +3,7 @@ import Tasks from './pages/Tasks.jsx'
 import Update from './pages/Update.jsx'
 
 import './App.css'
-import Login from './pages/login.jsx'
+import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 
 function App() {

@@ -1,51 +1,32 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Update = () => {
 
-  const Task = useLocation().state
-
-  useState(()=>{
-    console.log("Task data received:", Task.task.Title);
-  },[])
-
-  const [UpdatedTitle, setUpdatedTitle] = useState()
+  const task = useLocation().state?.task
+  const navigate = useNavigate()
+  const [updatedTitle, setUpdatedTitle] = useState(task?.Title || "")
+  const [updatedDescription, setUpdatedDescription] = useState(task?.Task || "")
 
 
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <h1 className='text-4xl font-bold mb-8'>Update Task</h1>
-      <div className='flex flex-col h-100 w-200 bg-gray-100 p-4 rounded-lg shadow-md overflow-y-auto m-2'>
-        <div className="flex w-full h-15 bg-white p-4 rounded-lg shadow-md items-center justify-center">
-          <input
-          className="flex m-2 bg-gray-50 w-full h-full focus:border-2 text-2xl px-2 focus:border-teal-300 focus:outline-none focus:ring-0"
-          value={Task.task.Title || ""}
-          // onChange={}
-           type="text"
-          
-          />
+    <main className="app-shell" style={{ minHeight: '100vh', padding: '2rem 1rem' }}>
+      <div className="dashboard" style={{ maxWidth: 700 }}>
+        <button className="secondary-button" onClick={() => navigate('/tasks')}>← Back to tasks</button>
+        <div className="form-card" style={{ margin: '3rem auto 0', width: '100%' }}>
+          <p style={{ color: '#5666d8', fontWeight: 700, margin: 0 }}>Refine your plan</p>
+          <h1 className="display-font" style={{ fontSize: '2rem', margin: '.4rem 0', color: '#172033' }}>Edit task</h1>
+          {!task ? <p style={{ color: '#7b8497' }}>This task could not be found. Return to your list to continue.</p> :
+            <form onSubmit={(event) => { event.preventDefault(); alert('Update functionality not implemented yet') }}>
+              <label className="field-label" htmlFor="update-title">Title</label>
+              <input id="update-title" className="field-input" value={updatedTitle} onChange={(event) => setUpdatedTitle(event.target.value)} />
+              <label className="field-label" htmlFor="update-description">Description</label>
+              <textarea id="update-description" className="field-input" rows="5" value={updatedDescription} onChange={(event) => setUpdatedDescription(event.target.value)} style={{ resize: 'vertical' }} />
+              <button className="primary-button" style={{ marginTop: '1.25rem' }} type="submit">Save changes</button>
+            </form>}
         </div>
-        <div className="flex w-full h-50 mt-2 bg-white rounded-lg shadow-md">
-          <input 
-          className="flex m-2 bg-gray-50 w-full h-1/2 focus:border-2 text-2xl px-2 focus:border-teal-300 focus:outline-none focus:ring-0" 
-          type="text"
-          value={Task.task.Task|| ""}
-          
-          />
-        </div>
-        <div className=' flex items-center justify-center mt-4'>
-          <button 
-            className='bg-blue-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-blue-600 transition duration-300'
-            onClick={() => alert('Update functionality not implemented yet')}>
-            Update Task
-          </button>
-          <button
-            className='bg-red-500 text-white px-4 py-2 rounded-lg shadow-md hover:bg-red-600 transition duration-300 ml-4'>
-            delete task
-          </button>
-          </div>
       </div>
-    </div>
+    </main>
   )
 }
 
